@@ -13,10 +13,10 @@ jobs:
       - run: mvn clean test
 
       - store_artifacts:
-        path: /target/allure-results
+          path: ~/target/allure-results
 
       - store_artifacts:
-        path: /target/surefire-reports
+          path: ~/target/surefire-reports
 
 
 
