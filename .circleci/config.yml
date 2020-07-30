@@ -1,9 +1,29 @@
 version: 2.1
 
-orbs:
-  maven: circleci/maven@0.0.12
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: 'circleci/openjdk:latest'
 
-workflows:
-  maven_test:
-    jobs:
-      - maven/test # checkout, build, test, and upload test results
+    working_directory: ~/circleci
+
+    steps:
+      - checkout
+      - run: mvn clean test
+
+      - store_artifacts:
+        path: /target/allure-results
+
+      - store_artifacts:
+        path: /target/surefire-reports
+
+
+
+# orbs:
+#   maven: circleci/maven@0.0.12
+#
+# workflows:
+#   maven_test:
+#     jobs:
+#       - maven/test # checkout, build, test, and upload test results
